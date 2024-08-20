@@ -1,6 +1,6 @@
 
 import { FontAwesome } from '@expo/vector-icons';
-import { View, Pressable } from 'react-native';
+import { View, Pressable, TouchableOpacity } from 'react-native';
 
 const ImageButton = ({
 icon, 
@@ -17,9 +17,11 @@ speciality
 }) => {
   return (
     <Pressable onPress={onClick}>
-        <View className={`rounded-full bg-white p-2 ${speciality ? "!items-center !justify-center grid h-[58px] w-[58px]": ""}`}>
+        <TouchableOpacity >
+        <View className={`rounded-full bg-white  ${speciality ? "!items-center !justify-center grid h-[58px] w-[58px]": " p-3"}`}>
         <FontAwesome name={icon} size={size} color={color}/>
         </View>
+        </TouchableOpacity>
     </Pressable>
   )
 }

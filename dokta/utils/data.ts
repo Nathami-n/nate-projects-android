@@ -9,3 +9,8 @@ export const doctorSpecialties = [
   { name: "General Physician", icon: "user-md" }, // faUserMd// faUserInjured
   { name: "ENT Specialist", icon: "stethoscope" }, // faStethoscope
 ];
+
+
+export const doctorData = [
+    
+]

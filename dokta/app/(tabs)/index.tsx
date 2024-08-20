@@ -1,6 +1,6 @@
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Text, StyleSheet, StatusBar, View, TextInput, FlatList, } from 'react-native';
-import { IconButton } from "@/components";
+import { IconButton, StackCard} from "@/components";
 import { doctorSpecialties } from "@/utils/data";
 
 export default function TestPage() {
@@ -21,7 +21,7 @@ export default function TestPage() {
                 <View>
                     <IconButton
                         icon={"bell-o"}
-                        color="grey"
+                        color="black"
                         size={15}
                         onClick={handleNotification}
                     />
@@ -66,8 +66,9 @@ export default function TestPage() {
                 )}
                 />
             </View>
+            <StackCard/>
             <StatusBar 
-            backgroundColor={"#333"} 
+            backgroundColor={"#333"}
             networkActivityIndicatorVisible 
             barStyle={"default"} />
         </SafeAreaView>
