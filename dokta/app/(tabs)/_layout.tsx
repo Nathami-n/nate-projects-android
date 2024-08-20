@@ -5,22 +5,37 @@ export default function HomeLayout() {
     return (
         <Tabs>
             <Tabs.Screen name="index" options={{
-                tabBarIcon: ({color}) => <FontAwesome size={28} name="home" color={color}/>,
-                headerShown: false,
-            }}/>
+                tabBarIcon: ({ color }) => <FontAwesome size={24} name="home" color={color} />,
+                headerTransparent: true,
+                headerTitle: "",
+                title: "Home",
+                tabBarLabelStyle: {
+                    fontSize: 12
+                }
+
+            }} />
             <Tabs.Screen name="book" options={{
-                tabBarIcon: ({color}) => <FontAwesome size={28} name="calendar" color={color}/>, 
+                tabBarIcon: ({ color }) => <FontAwesome size={24} name="calendar" color={color} />,
                 headerTitle: "Book a doctor",
-                title: "Book"
-            }}/>
+                title: "Book",
+                tabBarLabelStyle: {
+                    fontSize: 12
+                }
+            }} />
             <Tabs.Screen name="chat" options={{
-                tabBarIcon: ({color}) => <FontAwesome size={28} name="telegram" color={color}/>
+                tabBarIcon: ({ color }) => <FontAwesome size={24} name="telegram" color={color} />,
+                tabBarLabelStyle: {
+                    fontSize: 12,
+                }
             }} />
             <Tabs.Screen name="settings" options={{
-                tabBarIcon: ({color}) => <FontAwesome size={28} name="gears" color={color}/>, 
+                tabBarIcon: ({ color }) => <FontAwesome size={24} name="gears" color={color} />,
+                tabBarLabelStyle: {
+                    fontSize: 12
+                },
                 headerTitle: "Settings",
                 title: "Settings"
-            }}/>
+            }} />
         </Tabs>
     )
 }
