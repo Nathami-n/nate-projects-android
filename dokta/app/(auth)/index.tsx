@@ -8,7 +8,7 @@ import { router } from 'expo-router';
 
 export default function OnboardingScreen() {
     const [activeIndex, setActiveIndex] = useState(0);
-    const swiperRef = useRef(null);
+    const swiperRef = useRef<Swiper>(null);
     return (
         <SafeAreaView className='flex-1'>
             <Swiper
@@ -37,7 +37,7 @@ export default function OnboardingScreen() {
                 title={activeIndex === doctorsOnboarding.length - 1 ? "Continue" : "Next"}
                 buttonStyle="bg-blue mb-5 !w-11/12 mx-auto"
                 textStyle='text-white'
-                onPress={activeIndex === doctorsOnboarding.length - 1 ? router.replace("/(auth)/sign-up"): () => (swiperRef.current?.scrollBy(1))}
+                onPress={activeIndex === doctorsOnboarding.length - 1 ? () => router.replace("/(auth)/sign-up") : () => (swiperRef.current?.scrollBy(1))}
             />
             <StatusBar backgroundColor={"#333"} networkActivityIndicatorVisible />
         </SafeAreaView>
