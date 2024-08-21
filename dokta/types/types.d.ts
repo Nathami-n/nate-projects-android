@@ -1,4 +1,4 @@
-import { TouchableOpacityProps } from "react-native";
+import { TouchableOpacityProps, TextInputProps } from "react-native";
 
 declare interface ButtonProps extends TouchableOpacityProps {
     title: string;
@@ -16,4 +16,7 @@ declare interface InputFieldProps extends TextInputProps {
     inputStyle?: string;
     iconStyle?: string;
     className?:string;
+    iconRight?: boolean;
+    onClick?: (state: boolean) => void;
+    showPassword?: boolean;
 }

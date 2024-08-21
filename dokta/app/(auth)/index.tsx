@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function OnboardingScreen() {
     const [activeIndex, setActiveIndex] = useState(0);
-    const [isDebugMode, setIsDebugMode] = useState(true)
+    const [isDebugMode, setIsDebugMode] = useState(false)
     const swiperRef = useRef<Swiper>(null);
 
     useEffect(() => {

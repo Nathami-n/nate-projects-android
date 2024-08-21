@@ -2,9 +2,9 @@ import { Redirect } from "expo-router";
 
 
 export default function RedirectPage() {
-    return(
+    return (
         <Redirect
-        href={"/(auth)"}
+            href={"/(auth)"}
         />
     )
 }

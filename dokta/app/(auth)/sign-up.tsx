@@ -12,12 +12,17 @@ const SignUp = () => {
         password: "",
     });
 
+    const [showPassword, setShowPassword]  = useState(false);
+
     const onSignUpPress = () => {
 
     }
+    const handleShowPassword = (state: boolean) => {
+        setShowPassword(!state)
+    }
 
     return (
-        <ScrollView className="flex-1 bg-white" contentContainerStyle={{ justifyContent: "center", flex:1 }}>
+        <ScrollView className="flex-1 bg-white" contentContainerStyle={{ justifyContent: "center", flex: 1 }}>
             <View >
                 <View className="w-full ">
                     <Text className="text-xl text-center text-black">
@@ -29,19 +34,31 @@ const SignUp = () => {
                         <InputField
                             label="Name"
                             icon={require("../../assets/icons/person.png")}
+                            placeholder="john doe"
+                            value={form.name}
+                            onChangeText={(value) => setForm((prev) => ({ ...prev, name: value }))}
                         />
                     </View>
                     <View className="mb-4">
                         <InputField
                             label="Email"
                             icon={require("../../assets/icons/email.png")}
+                            placeholder="test@gmail.com"
+                            value={form.email}
+                            onChangeText={(value) => setForm((prev) => ({ ...prev, email: value }))}
                         />
                     </View>
                     <View className="">
                         <InputField
                             label="Password"
                             icon={require("../../assets/icons/lock.png")}
-                            secureTextEntry={true}
+                            secureTextEntry={showPassword ? false : true}
+                            placeholder="***"
+                            iconRight
+                            containerStyle="pr-3"
+                            showPassword ={showPassword}
+                            onClick ={handleShowPassword}
+                            onChangeText={(value)=> setForm((prev) => ({...prev, password: value}))}
                         />
                     </View>
                     <CustomButton
