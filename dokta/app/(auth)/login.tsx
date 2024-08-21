@@ -17,11 +17,11 @@ export default function Login () {
     }
 
     return (
-        <ScrollView className="flex-1 bg-white" contentContainerStyle={{ justifyContent: "center" }}>
-            <View className="flex-1">
+        <ScrollView className="flex-1 bg-white" contentContainerStyle={{ justifyContent: "center", flex:1 }}>
+            <View >
                 <View className="w-full ">
                     <Text className="text-xl text-center text-black">
-                        SignUp to <Text className="text-blue">Dokta</Text><Text className="text-rose-500">.</Text>
+                        Login to <Text className="text-blue">Dokta</Text><Text className="text-rose-500">.</Text>
                     </Text>
                 </View>
                 <View className="p-5 ">
@@ -39,14 +39,14 @@ export default function Login () {
                         />
                     </View>
                     <CustomButton
-                        title="Sign Up"
+                        title="Login"
                         onPress={onSignUpPress}
                         buttonStyle="mt-5 bg-blue"
                         textStyle="text-white"
                     />
                     <OAuth />
                     <Link
-                        href="/login"
+                        href="/sign-up"
                         className="text-md text-center mt-4"
                     >
                         Have no  account?{" "}

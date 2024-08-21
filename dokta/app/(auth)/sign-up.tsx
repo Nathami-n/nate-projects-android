@@ -17,11 +17,11 @@ const SignUp = () => {
     }
 
     return (
-        <ScrollView className="flex-1 bg-white" contentContainerStyle={{ justifyContent: "center" }}>
-            <View className="flex-1">
+        <ScrollView className="flex-1 bg-white" contentContainerStyle={{ justifyContent: "center", flex:1 }}>
+            <View >
                 <View className="w-full ">
                     <Text className="text-xl text-center text-black">
-                        SignUp to <Text className="text-blue">Dokta</Text><Text className="text-rose-500">.</Text>
+                        Sign Up to <Text className="text-blue text-xl">Dokta</Text><Text className="text-rose-500">.</Text>
                     </Text>
                 </View>
                 <View className="p-5 ">
