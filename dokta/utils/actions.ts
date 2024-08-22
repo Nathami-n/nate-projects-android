@@ -1,6 +1,6 @@
-import { Alert } from "react-native";
+
 import { auth } from "../firebase/config";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, updateProfile, signInWithEmailAndPassword } from "firebase/auth";
 
 const handleFirstTimeSignUp = async (
   email: string,
@@ -22,7 +22,12 @@ const handleFirstTimeSignUp = async (
 };
 
 const handleLogin = async  (email: string, password: string) => {
-
+    try{
+      const user = await signInWithEmailAndPassword(auth, email, password);
+      return {data: user, error: null};
+    } catch(error: any){
+      return ({data: null, error: error});
+    }
 }
 
-export { handleFirstTimeSignUp };
+export { handleFirstTimeSignUp, handleLogin};

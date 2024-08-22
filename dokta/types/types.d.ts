@@ -1,9 +1,11 @@
-import { TouchableOpacityProps, TextInputProps } from "react-native";
+import { TouchableOpacityProps, TextInputProps, ActivityIndicatorProps} from "react-native";
 
 declare interface ButtonProps extends TouchableOpacityProps {
     title: string;
     buttonStyle?:string;
     textStyle?: string;
+    loading?:boolean;
+    indicator?: React.ReactElement<ActivityIndicatorProps>
 }
 
 
@@ -19,4 +21,5 @@ declare interface InputFieldProps extends TextInputProps {
     iconRight?: boolean;
     onClick?: (state: boolean) => void;
     showPassword?: boolean;
+   
 }

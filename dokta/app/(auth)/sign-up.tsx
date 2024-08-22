@@ -1,7 +1,7 @@
 
 import { Link, router } from "expo-router";
 import { useState } from "react";
-import { Image, ScrollView, StatusBar, Text, View } from "react-native";
+import { ActivityIndicator, ScrollView, StatusBar, Text, View } from "react-native";
 import { handleFirstTimeSignUp } from '../../utils/actions';
 import Toast from 'react-native-root-toast';
 
@@ -15,12 +15,18 @@ const SignUp = () => {
     });
 
     const [showPassword, setShowPassword] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     const onSignUpPress = async () => {
+        setLoading(true);
         const response = await handleFirstTimeSignUp(form.email, form.password, form.name);
         if (response.data === null) {
-            return Toast.show(`${response.error.message}`);
+             Toast.show(`${response.error.message}`);
+             setLoading(false);
+             return;
         }
+        setForm({ name: "", email: "", password: "" });
+        setLoading(false)
         router.push("/login");
         Toast.show(`${response.data.user.displayName}, now proceed to login`);
     }
@@ -73,6 +79,8 @@ const SignUp = () => {
                         onPress={onSignUpPress}
                         buttonStyle="mt-5 bg-blue"
                         textStyle="text-white"
+                        indicator={<ActivityIndicator color="white"/>}
+                        loading={loading}
                     />
                     <OAuth />
                     <Link

@@ -1,7 +1,9 @@
 
-import { Link } from "expo-router";
+import { Link, router} from "expo-router";
 import { useState } from "react";
-import { Image, ScrollView, StatusBar, Text, View } from "react-native";
+import {ScrollView, StatusBar, Text, View, ActivityIndicator} from "react-native";
+import {handleLogin} from '../../utils/actions';
+import Toast from 'react-native-root-toast';
 
 import { CustomButton, InputField, OAuth } from "@/components";
 
@@ -10,15 +12,25 @@ export default function Login() {
         email: "",
         password: "",
     });
-
+    const [loading, setLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
     const handleShowPassword = (state: boolean) => {
         setShowPassword(!state)
     }
 
-    const onLoginPress = () => {
-        
+    const onLoginPress = async () => {
+        setLoading(true);
+        const response = await handleLogin(form.email, form.password);
+        if(response.data === null) {
+            Toast.show(response.error.message);
+            setLoading(false);
+            return;
+        }
+        setForm({email: '', password: ""});
+        setLoading(false);
+        router.push('/(tabs)');
+        Toast.show("Success");
     }
 
     return (
@@ -57,6 +69,8 @@ export default function Login() {
                         onPress={onLoginPress}
                         buttonStyle="mt-5 bg-blue"
                         textStyle="text-white"
+                        loading={loading}
+                        indicator={<ActivityIndicator color="white"/>}
                     />
                     <OAuth />
                     <Link
