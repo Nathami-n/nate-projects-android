@@ -1,7 +1,9 @@
 
-import { Link } from "expo-router";
+import { Link, router } from "expo-router";
 import { useState } from "react";
 import { Image, ScrollView, StatusBar, Text, View } from "react-native";
+import { handleFirstTimeSignUp } from '../../utils/actions';
+import Toast from 'react-native-root-toast';
 
 import { CustomButton, InputField, OAuth } from "@/components";
 
@@ -12,10 +14,15 @@ const SignUp = () => {
         password: "",
     });
 
-    const [showPassword, setShowPassword]  = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
-    const onSignUpPress = () => {
-
+    const onSignUpPress = async () => {
+        const response = await handleFirstTimeSignUp(form.email, form.password, form.name);
+        if (response.data === null) {
+            return Toast.show(`${response.error.message}`);
+        }
+        router.push("/login");
+        Toast.show(`${response.data.user.displayName}, now proceed to login`);
     }
     const handleShowPassword = (state: boolean) => {
         setShowPassword(!state)
@@ -56,9 +63,9 @@ const SignUp = () => {
                             placeholder="***"
                             iconRight
                             containerStyle="pr-3"
-                            showPassword ={showPassword}
-                            onClick ={handleShowPassword}
-                            onChangeText={(value)=> setForm((prev) => ({...prev, password: value}))}
+                            showPassword={showPassword}
+                            onClick={handleShowPassword}
+                            onChangeText={(value) => setForm((prev) => ({ ...prev, password: value }))}
                         />
                     </View>
                     <CustomButton
