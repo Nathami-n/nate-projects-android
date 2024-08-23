@@ -14,8 +14,8 @@ export default function OnboardingScreen() {
     useEffect(() => {
         const checkOnboardingStatus = async () => {
             const isOnboarded = await AsyncStorage.getItem('isOnboarded');
-            if (!isOnboarded) {
-              router.replace('/(auth)/sign-up');
+            if (isOnboarded) {
+              router.replace('/(auth)/login');
             }
         };
         checkOnboardingStatus();

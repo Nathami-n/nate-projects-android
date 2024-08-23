@@ -13,7 +13,7 @@ speciality
     color: string;
     onClick?: () => void;
     size: number;
-    speciality: boolean
+    speciality?: boolean
 }) => {
   return (
     <Pressable onPress={onClick}>
