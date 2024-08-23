@@ -29,7 +29,7 @@ export default function HomeLayout() {
                 }
             }} />
             <Tabs.Screen name="settings" options={{
-                tabBarIcon: ({ color }) => <FontAwesome size={24} name="gears" color={color} />,
+                tabBarIcon: ({ color }) => <FontAwesome size={24} name="gear" color={color} />,
                 tabBarLabelStyle: {
                     fontSize: 12
                 },

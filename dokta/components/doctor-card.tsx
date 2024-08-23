@@ -7,16 +7,17 @@ export const DoctorCard = ({ doc }: {
     doc: Doctor
 }) => {
     return (
-        <TouchableOpacity className="bg-white p-2 rounded-lg">
+        <TouchableOpacity className="bg-white py-2 px-4 rounded-lg">
             <View className="flex flex-row justify-between items-center">
                 <View className="flex flex-row ">
-                    <View className="w-[80px]" >
+                    <View className="w-[50px] h-[50px] rounded-full items-center" >
                         <Image
                             source={{
                                 uri: doc.imageUrl
                             }}
-                            className=" w-full h-full !rounded-lg"
-                            resizeMode="contain"
+                            className=" w-full mr-2 h-full rounded-full"
+                            resizeMode="cover"
+                            
                         />
                     </View>
                     <View className="">
@@ -26,7 +27,7 @@ export const DoctorCard = ({ doc }: {
                 </View>
                 <View className="flex flex-row items-center gap-x-1">
                     <FontAwesome name="star" color="orange" />
-                    <Text className=" text-gray-500 mr-2">{doc.rating}</Text>
+                    <Text className=" text-gray-600 mr-2">{parseFloat(doc.rating.toString()).toFixed(1)}</Text>
                 </View>
             </View>
         </TouchableOpacity>

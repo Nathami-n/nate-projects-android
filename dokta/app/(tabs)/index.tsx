@@ -1,25 +1,44 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, StatusBar, View, TextInput, FlatList, Image, TouchableOpacity, ScrollView } from 'react-native';
+import { Text, StatusBar, View, TextInput, FlatList, Image, TouchableOpacity, ScrollView, RefreshControl} from 'react-native';
 import { IconButton } from "@/components";
 import { doctorSpecialties } from "@/utils/data";
-import { useEffect, useState } from "react";
-import { useDoctorStore, Doctor } from "@/zustand/doctor-store";
+import { useEffect, useState, useCallback } from "react";
+import { useDoctorStore } from "@/zustand/doctor-store";
 import { DoctorCard } from '@/components/doctor-card';
+import LottieView from 'lottie-react-native';
 
 export default function TestPage() {
     const { doctors, error, loading, fetchDoctors } = useDoctorStore();
+    const [refreshing, setRefreshing] = useState(false)
 
     useEffect(() => {
         fetchDoctors();
     }, []);
     const handleNotification = () => {
     }
+
+    const onRefresh = useCallback(()=>{
+        setRefreshing(true);
+        fetchDoctors();
+        setRefreshing(false);
+    }
+    , [doctors]) 
+
+    
+
     const image = require("../../assets/images/hero.png")
     return (
         <SafeAreaView
             className="bg-bg flex-1 px-1"
         >
-            <ScrollView>
+            <ScrollView
+            refreshControl={
+            <RefreshControl
+            refreshing={loading}
+            onRefresh={onRefresh}
+            />
+            } 
+            >
                 <View className="flex-row items-center justify-between px-4 mt-4">
                     {/* welcome */}
                     <View>
@@ -115,14 +134,37 @@ export default function TestPage() {
                     </View>
                     <View className="flex-1 mt-4 px-2">
                         {error ? (<Text>{error}</Text>) : loading ? (
-                            <Text>loading...</Text>)
-                        : doctors.length > 0 ? (
-                            doctors.map((doctor, index) => (
-                                <DoctorCard doc={doctor} key={index}/>
-                            ))
-                        ) : (
-                            <Text>No doctors available</Text>
+                            <View style={{
+                                alignItems: "center"
+                            }}>
+                                <LottieView
+                                    autoPlay={true}
+                                    loop={true}
+                                    source={require("../../lottie/f-doc.json")}
+                                    style={{ width: 200, height: 80 }}
+                                />
+                                <Text className="text-gray-500">Fetching doctors...</Text>
+                            </View>
                         )
+                            : doctors.length > 0 ? (
+                                doctors.map((doctor, index) => (
+                                    <View className="mb-2">
+                                        <DoctorCard doc={doctor} key={index} />
+                                    </View>
+                                ))
+                            ) : (
+                                <View style={{
+                                    alignItems: "center"
+                                }}>
+                                    <LottieView
+                                        autoPlay={true}
+                                        loop={true}
+                                        source={require("../../lottie/not-found.json")}
+                                        style={{ width: 200, height: 80 }}
+                                    />
+                                    <Text className="text-gray-500">Oops! no doctors found</Text>
+                                </View>
+                            )
                         }
                     </View>
                 </View>
