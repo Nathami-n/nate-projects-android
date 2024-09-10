@@ -2,6 +2,7 @@ import { TouchableOpacity, View, Text, Image } from "react-native"
 import { Doctor } from '../zustand/doctor-store';
 import { FontAwesome } from '@expo/vector-icons';
 import { RouteParamInput, router } from "expo-router";
+import { IconButton } from ".";
 
 
 export const DoctorCard = ({ doc }: {
@@ -12,28 +13,41 @@ export const DoctorCard = ({ doc }: {
         router.push(`/doctor/${doc.id}`);
     }
     return (
-        <TouchableOpacity className="bg-white py-2 px-4 rounded-lg" onPress={handleCardPress}>
-            <View className="flex flex-row justify-between items-center">
-                <View className="flex flex-row ">
-                    <View className="w-[50px] h-[50px] rounded-full items-center" >
+        <TouchableOpacity className="bg-white py-4 px-4 rounded-lg" onPress={handleCardPress}>
+            <View className="flex flex-row justify-between relative items-center">
+                <View className="flex flex-row gap-x-2">
+                    <View className="w-[72px] h-[72px] rounded-full items-center" >
                         <Image
                             source={{
                                 uri: doc.imageUrl
                             }}
-                            className=" w-full mr-2 h-full rounded-full"
+                            className=" w-full mr-2 h-full rounded-tl-lg rounded-br-lg rounded-tr-md rounded-bl-md"
                             resizeMode="cover"
 
                         />
                     </View>
-                    <View className="">
-                        <Text className="font-semibold text-lg">{doc.name}</Text>
-                        <Text className="text-sm text-gray-300">{doc.speciality}</Text>
+                    <View className="w-full flex-1 ">
+                        <View className="flex flex-row items-center justify-between">
+                            <Text className="font-semibold text-lg">{doc.name}</Text>
+                            <View className="">
+                                <IconButton
+                                    size={20}
+                                    icon={"heart-o"}
+                                    color="blue" />
+                            </View>
+                        </View>
+                        <Text className="text-md text-gray-500 -mt-2 mb-1">{doc.speciality}</Text>
+                        <View className="flex flex-row items-center justify-between">
+                            <View className="flex-row gap-x-1 items-center">
+                                <FontAwesome name="star" color={"orange"}/>
+                                <Text>{parseFloat(doc.rating.toString()).toFixed(1)}</Text>
+                            </View>
+
+                            <Text className=" text-sm">Ksh{doc.price}/hr</Text>
+                        </View>
                     </View>
                 </View>
-                <View className="flex flex-row items-center gap-x-1">
-                    <FontAwesome name="star" color="orange" />
-                    <Text className=" text-gray-600 mr-2">{parseFloat(doc.rating.toString()).toFixed(1)}</Text>
-                </View>
+
             </View>
         </TouchableOpacity>
     )

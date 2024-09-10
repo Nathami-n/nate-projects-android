@@ -1,13 +1,16 @@
 import { IconButton } from "@/components";
 import { useDoctorStore } from "@/zustand/doctor-store";
 import { FontAwesome } from "@expo/vector-icons";
-import { Stack } from "expo-router";
-import { ScrollView, View, Text } from "react-native";
+import { Stack, useGlobalSearchParams } from "expo-router";
+import { ScrollView, View, Text , Image} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function DoctorDescriptionPage() {
+    const doc_id = useGlobalSearchParams();
     const { doctors } = useDoctorStore();
+
+    const foundDoctor = doctors.find((doc) => doc.id === doc_id.id);
 
     return (
         <ScrollView style={{paddingHorizontal: 10}}>
@@ -37,6 +40,18 @@ export default function DoctorDescriptionPage() {
                         size={16}
 
                         />
+
+                    </View>
+                </View>
+
+                {/* Doctor image */}
+                <View>
+                    <View className="flex-row">
+                        <View>
+                            <Image
+                                src={foundDoctor?.imageUrl}
+                            />
+                        </View>
 
                     </View>
                 </View>
