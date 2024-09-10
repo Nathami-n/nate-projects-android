@@ -1,49 +1,63 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, StatusBar, View, TextInput, FlatList, Image, TouchableOpacity, ScrollView, RefreshControl} from 'react-native';
+import { Text, StatusBar, View, TextInput, FlatList, Image, TouchableOpacity, ScrollView, RefreshControl } from 'react-native';
 import { IconButton } from "@/components";
 import { doctorSpecialties } from "@/utils/data";
 import { useEffect, useState, useCallback } from "react";
 import { useDoctorStore } from "@/zustand/doctor-store";
 import { DoctorCard } from '@/components/doctor-card';
 import LottieView from 'lottie-react-native';
+import { getAuth } from "firebase/auth";
+
 
 export default function TestPage() {
     const { doctors, error, loading, fetchDoctors } = useDoctorStore();
-    const [refreshing, setRefreshing] = useState(false)
+    const [refreshing, setRefreshing] = useState(false);
+    const auth = getAuth();
+    const user = auth.currentUser;
 
+    const getCurrentDateAndGreeting = () => {
+        const currentTime = new Date().getHours();
+        if (currentTime > 12) {
+            return "Good evening";
+        } else {
+            return "Good morning";
+        }
+    }
     useEffect(() => {
         fetchDoctors();
     }, []);
     const handleNotification = () => {
     }
 
-    const onRefresh = useCallback(()=>{
+    const onRefresh = useCallback(() => {
         setRefreshing(true);
         fetchDoctors();
         setRefreshing(false);
     }
-    , [doctors]) 
+        , [doctors])
 
-    
 
-    const image = require("../../assets/images/hero.png")
+
+    const image = require("../../assets/images/hero.png");
     return (
         <SafeAreaView
             className="bg-bg flex-1 px-1"
         >
             <ScrollView
-            refreshControl={
-            <RefreshControl
-            refreshing={loading}
-            onRefresh={onRefresh}
-            />
-            } 
+                refreshControl={
+                    <RefreshControl
+                        refreshing={loading}
+                        onRefresh={onRefresh}
+                    />
+                }
             >
                 <View className="flex-row items-center justify-between px-4 mt-4">
                     {/* welcome */}
                     <View>
-                        <Text className="font-semibold text-xl">Hello Nathan</Text>
-                        <Text className="text-gray-500">Good Morning</Text>
+                        <Text className="font-semibold text-xl">{user?.displayName}</Text>
+                        <Text className="text-gray-500">
+                            {getCurrentDateAndGreeting()}
+                        </Text>
                     </View>
                     {/* icon */}
                     <View>
@@ -102,6 +116,7 @@ export default function TestPage() {
                         </TouchableOpacity>
                     </View>
                     <FlatList
+                        keyExtractor={(item) => item.name}
                         data={doctorSpecialties}
                         showsHorizontalScrollIndicator
                         contentContainerStyle={{

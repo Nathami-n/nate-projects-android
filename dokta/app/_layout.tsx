@@ -11,6 +11,10 @@ export default function Layout() {
                     headerShown: false
                 }} />
                 <Stack.Screen name="index" options={{ headerShown: false }} />
+                <Stack.Screen name="doctor/[id]" options={{ 
+                    headerShown: false,
+
+                }} />
             </Stack>
         </RootSiblingParent>
     )
