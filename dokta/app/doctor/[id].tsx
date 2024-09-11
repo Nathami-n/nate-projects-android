@@ -2,7 +2,7 @@ import { IconButton } from "@/components";
 import { useDoctorStore } from "@/zustand/doctor-store";
 import { FontAwesome } from "@expo/vector-icons";
 import { Stack, useGlobalSearchParams } from "expo-router";
-import { ScrollView, View, Text, Image, TouchableOpacity } from "react-native";
+import { ScrollView, View, Text, Image, TouchableOpacity, FlatList } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -13,7 +13,7 @@ export default function DoctorDescriptionPage() {
     const foundDoctor = doctors.find((doc) => doc.id === doc_id.id);
 
     return (
-        <ScrollView style={{ paddingHorizontal: 10, }}>
+        <ScrollView style={{ paddingHorizontal: 10 }}>
             <SafeAreaView className="px-3">
                 <View className="items-center flex-1 flex-row justify-between px-2 mt-5 ">
                     <View>
@@ -44,7 +44,6 @@ export default function DoctorDescriptionPage() {
                     </View>
                 </View>
                 <View className="flex-row flex-1 mt-10 gap-x-3">
-
                     <View className="rounded-lg">
                         <Image
                         src={foundDoctor?.imageUrl}
@@ -54,7 +53,7 @@ export default function DoctorDescriptionPage() {
                     </View>
 
                     <View className="flex-1">
-                        <View className="flex flex-row gap-x-1 items-center">
+                        <View className="flex flex-row gap-x-1  justify-between items-center">
                             <Text className="font-semibold text-lg">{foundDoctor?.name}</Text>
                             <View className="flex items-center flex-row gap-x-2">
                                 <TouchableOpacity className="rounded-full p-2 bg-white flex items-center justify-center flex-row ">
@@ -69,10 +68,34 @@ export default function DoctorDescriptionPage() {
                             </View>
                         </View>
                         <Text className="text-sky-500 text-sm">{foundDoctor?.speciality}</Text>
+
+                        <View className="mt-5 flex flex-row items-center justify-between">
+                            <Text className="font-semibold text-md">Rates/hr</Text>
+                            <Text className="text-sm">KSH{foundDoctor?.price.toLocaleString()}</Text>
+                        </View>
                     </View>
+
+                
 
                 </View>
 
+                {/* description */}
+                <View className="flex-1 mt-10 ">
+                    <Text className="font-semibold text-lg">Description</Text>
+                    <Text className="text-gray-500 text-xs">
+                        {foundDoctor?.statement}
+                    </Text>
+                </View>
+
+                {/* working hours */}
+                <View className="mt-10">
+                    <View className="flex flex-row justify-between">
+                        <Text>Working Hours</Text>
+                        <TouchableOpacity >
+                            <Text className="text-sky-500">See all</Text>
+                        </TouchableOpacity>
+                    </View>
+                </View>
             </SafeAreaView>
         </ScrollView>
     )
