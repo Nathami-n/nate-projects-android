@@ -164,7 +164,7 @@ export default function TestPage() {
                             : doctors.length > 0 ? (
                                 doctors.map((doctor, index) => (
                                     <View className="mb-2">
-                                        <DoctorCard doc={doctor} key={index} />
+                                        <DoctorCard key={index} doc={doctor} key={index} />
                                     </View>
                                 ))
                             ) : (
