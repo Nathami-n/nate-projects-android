@@ -67,7 +67,7 @@ export default function DoctorDescriptionPage() {
                                 </TouchableOpacity>
                             </View>
                         </View>
-                        <Text className="text-sky-500 text-sm">{foundDoctor?.speciality}</Text>
+                        <Text className="text-blue text-sm">{foundDoctor?.speciality}</Text>
 
                         <View className="mt-5 flex flex-row items-center justify-between">
                             <Text className="font-semibold text-md">Rates/hr</Text>
@@ -89,12 +89,26 @@ export default function DoctorDescriptionPage() {
 
                 {/* working hours */}
                 <View className="mt-10">
-                    <View className="flex flex-row justify-between">
-                        <Text>Working Hours</Text>
+                    <View className="flex flex-row justify-between items-center">
+                        <Text className="text-lg font-semibold">Working Hours</Text>
                         <TouchableOpacity >
-                            <Text className="text-sky-500">See all</Text>
+                            <Text className="text-blue">See all</Text>
                         </TouchableOpacity>
                     </View>
+
+                    <FlatList
+                    data={["10:00AM", "10:30AM", "12:00PM", "12:30PM", "3:00PM", "3:30PM"]}
+                    horizontal
+                    contentContainerStyle ={{
+                        padding:16
+                    }}
+                    keyExtractor={(data) => data}
+                    renderItem={({item, index}) => (
+                        <View className={`rounded-lg p-4 ${index === 1 ? "!bg-blue text-white" : " bg-white"}  mr-2 mt-2`}>
+                        <Text className={`${index === 1 ? "text-white" :''}`}>{item}</Text>
+                        </View>
+                    )}
+                    />
                 </View>
             </SafeAreaView>
         </ScrollView>
