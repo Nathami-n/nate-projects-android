@@ -74,9 +74,25 @@ export default function DoctorDescriptionPage() {
                             <Text className="text-sm">KSH{foundDoctor?.price.toLocaleString()}</Text>
                         </View>
                     </View>
+                </View>
 
-                
-
+                <View className="flex-row justify-between px-2 mt-6">
+                    <View className=" p-3 rounded-lg bg-white justify-center items-center gap-y-1">
+                        <FontAwesome name="users" color={"#4d65d3"} size={20}/>
+                        <Text className="font-semibold text-md">1000+</Text>
+                        <Text className="text-xs">Patients</Text>
+                    </View>
+                    <View className=" p-3 rounded-lg bg-white justify-center items-center gap-y-1">
+                        <FontAwesome name="star" color={"orange"} size={20}/>
+                        <Text className="font-semibold text-md">{parseFloat(foundDoctor?.rating.toString() as string).toFixed(1)}</Text>
+                        <Text className="text-xs">Rating</Text>
+                    </View>
+                    <View className=" p-3 rounded-lg bg-white justify-center items-center gap-y-1">
+                        <FontAwesome name="users" color={"#4d65d3"} size={20}/>
+                        <Text className="font-semibold text-md">10 Years</Text>
+                        <Text className="text-xs">Experience</Text>
+                    </View>
+                    
                 </View>
 
                 {/* description */}
